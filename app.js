@@ -11,9 +11,8 @@ const displayEquation = e => {
     }
 }
 
-const calculate = () => {
+const calculate = (input) => {
     try {
-        input = inputField.innerHTML;
         const power = /\^+/g;
         const sqrt = /√+/g;
         const numPrecedingSqrt = /(?<=[\d])√/g;
@@ -44,6 +43,8 @@ const calculate = () => {
             output.innerHTML = parsed;
             inputField.innerHTML = "";
         }
+
+        return parsed;
     }
     catch {
         alert("Please check this equation is valid. All parentheses must be closed.");
@@ -72,7 +73,9 @@ const squareRoot = document.querySelector(".square-root");
 squareRoot.addEventListener("click", square);
 
 const equals = document.querySelector("button.equals");
-equals.addEventListener("click", calculate);
+equals.addEventListener("click", () => {
+    calculate(inputField.innerHTML);
+});
 
 const clear = document.querySelector(".clear");
 clear.addEventListener("click", clearFunction);
